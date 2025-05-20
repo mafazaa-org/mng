@@ -1,17 +1,25 @@
 server:
     host: "0.0.0.0"
     name: "kibana"
+    ssl:
+        enabled: true
+        certificate: /usr/share/kibana/config/certs/kibana.crt
+        key: /usr/share/kibana/config/certs/kibana.key
+
 elasticsearch:
     hosts: ["https://elasticsearch:9200"]
     username: "kibana_system"
     password: "${KIBANA_SYSTEM_PASSWORD}"
     ssl:
         certificateAuthorities:
-            ["/usr/share/kibana/config/certs/elastic-ca.p12"]
-        certificate: "/usr/share/kibana/config/certs/elastic-certificates.p12"
-        key: "/usr/share/kibana/config/certs/elastic-certificates.p12"
+            ["/usr/share/kibana/config/certs/elastic-ca.pem"]
+        # certificate: "/usr/share/kibana/config/certs/elastic-certificates.pem"
+        # key: "/usr/share/kibana/config/certs/elastic-certificates.pem"
         keystore:
+            path: "/usr/share/kibana/config/certs/elastic-certificates.p12"
             password: "${CERT_PASSWORD}"
-xpack:
-    security:
-        enabled: true
+# xpack:
+#     security:
+#         http:
+#             ssl:
+#                 client_authentication: optional

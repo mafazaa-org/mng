@@ -53,6 +53,12 @@ services:
             - "5601:5601"
         networks:
             - efk
+        # healthcheck:
+        #     test: ["CMD", "curl", "-f", "https://localhost:5601/"]
+        #     interval: 10s
+        #     retries: 5
+        #     timeout: 5s
+        #     start_period: 40s
         environment:
             ENV_NAME: ${ENV_NAME}
             KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD}

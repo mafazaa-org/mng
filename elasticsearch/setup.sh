@@ -8,7 +8,7 @@ until curl -s -u "elastic:$ELASTIC_PASSWORD" --cacert /usr/share/elasticsearch/c
     sleep 5
 done
 # Set password for kibana_system user
-/usr/share/elasticsearch/bin/elasticsearch-reset-password -u kibana_system -a -b -f <<<"$KIBANA_SYSTEM_PASSWORD"
+curl -u "elastic:${ELASTIC_PASSWORD}" -X POST -d "{\"password\":\"${KIBANA_SYSTEM_PASSWORD}\"}" https://localhost:9200/_security/user/kibana_system/_password -k -H 'Content-Type: application/json'
 
 echo "Elasticsearch setup complete"
 
