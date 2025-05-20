@@ -1,0 +1,38 @@
+cluster:
+    name: mafazaa-logging${ENV_NAME}
+discovery:
+    type: single-node
+node:
+    name: elasticsearch
+network:
+    host: 0.0.0.0
+xpack:
+    security:
+        enabled: true
+        authc:
+            api_key:
+                enabled: true
+        http:
+            ssl:
+                enabled: true
+                keystore:
+                    path: /usr/share/elasticsearch/config/certs/elastic-certificates.p12
+                    password: ${CERT_PASSWORD}
+    monitoring:
+        templates:
+            enabled: false
+    profiling:
+        enabled: false
+    watcher:
+        enabled: false
+    ml:
+        enabled: false
+    eql:
+        enabled: false
+
+    ccr:
+        enabled: false
+    graph:
+        enabled: false
+    idp:
+        enabled: false

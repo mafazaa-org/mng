@@ -1,2 +1,3 @@
-# elasticsearch-kibana-config
-A repo for management of elasticsearch and kibana
+# Mafazaa-EFK
+
+Managing of elasticsearch, kibana, fluentd for mafazaa

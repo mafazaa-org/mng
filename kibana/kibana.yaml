@@ -1,0 +1,17 @@
+server:
+    host: "0.0.0.0"
+    name: "kibana"
+elasticsearch:
+    hosts: ["https://elasticsearch:9200"]
+    username: "kibana_system"
+    password: "${KIBANA_SYSTEM_PASSWORD}"
+    ssl:
+        certificateAuthorities:
+            ["/usr/share/kibana/config/certs/elastic-ca.p12"]
+        certificate: "/usr/share/kibana/config/certs/elastic-certificates.p12"
+        key: "/usr/share/kibana/config/certs/elastic-certificates.p12"
+        keystore:
+            password: "${CERT_PASSWORD}"
+xpack:
+    security:
+        enabled: true

@@ -1,0 +1,50 @@
+{
+	"index_patterns": ["mafazaa.ainaa.dns.*"],
+	"template": {
+		"mappings": {
+			"properties": {
+				"source_ip": {
+					"type": "ip"
+				},
+				"dns_query": {
+					"properties": {
+						"qname": {
+							"type": "keyword"
+						},
+						"type": {
+							"type": "keyword"
+						}
+					}
+				},
+				"response": {
+					"properties": {
+						"resolved": {
+							"type": "boolean"
+						},
+						"block_regex": {
+							"type": "boolean"
+						},
+						"block": {
+							"type": "boolean"
+						},
+						"upstream": {
+							"type": "ip"
+						},
+						"google_regex": {
+							"type": "boolean"
+						},
+						"cache_hit": {
+							"type": "boolean"
+						},
+						"answers": {
+							"type": "keyword"
+						}
+					}
+				}
+			}
+		}
+	},
+	"settings": {
+		"index.lifecycle.name": "ilm-policy"
+	}
+}

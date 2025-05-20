@@ -1,0 +1,79 @@
+services:
+    elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:${ES_VERSION}
+        container_name: elasticsearch
+        hostname: elasticsearch
+        volumes:
+            - ./elasticsearch/elasticsearch.yaml:/usr/share/elasticsearch/config/elasticsearch.yml
+            - ./elasticsearch/setup.sh:/usr/share/elasticsearch/setup-elasticsearch.sh
+            - ./c:/usr/share/elasticsearch/config/certs
+        ports:
+            - "9200:9200"
+        healthcheck:
+            test:
+                [
+                    "CMD",
+                    "curl",
+                    "-u",
+                    "elastic:${ELASTIC_PASSWORD}",
+                    "-f",
+                    "https://localhost:9200/_cluster/health",
+                    "--cacert",
+                    "/usr/share/elasticsearch/config/certs/elastic-ca.pem",
+                ]
+            interval: 10s
+            retries: 5
+            timeout: 5s
+            start_period: 40s
+        networks:
+            - efk
+        environment:
+            CA_PASSWORD: ${CA_PASSWORD}
+            CERT_PASSWORD: ${CERT_PASSWORD}
+            ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+            ENV_NAME: ${ENV_NAME}
+        command: >
+            /bin/bash -c "
+                /usr/local/bin/docker-entrypoint.sh &
+                /bin/bash /usr/share/elasticsearch/setup-elasticsearch.sh '${ELASTIC_PASSWORD}' '${KIBANA_SYSTEM_PASSWORD}' && 
+                wait
+            "
+
+    kibana:
+        image: docker.elastic.co/kibana/kibana:${ES_VERSION}
+        container_name: kibana
+        hostname: kibana
+        depends_on:
+            elasticsearch:
+                condition: service_healthy
+        volumes:
+            - ./kibana/kibana.yaml:/usr/share/kibana/config/kibana.yml
+            - ./c:/usr/share/kibana/config/certs
+        ports:
+            - "5601:5601"
+        networks:
+            - efk
+        environment:
+            ENV_NAME: ${ENV_NAME}
+            KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD}
+            CERT_PASSWORD: ${CERT_PASSWORD}
+    fluentd:
+        container_name: fluentd
+        build: fluentd
+        hostname: fluentd
+        depends_on:
+            elasticsearch:
+                condition: service_healthy
+        networks:
+            - efk
+        ports:
+            - "24224:24224"
+            - "24224:24224/udp"
+            - "9880:9880"
+        volumes:
+            - ./fluentd/conf:/fluentd/etc/
+            - ./c/elastic-ca.pem:/fluentd/etc/elastic-ca.pem
+        environment:
+            ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+networks:
+    efk:
