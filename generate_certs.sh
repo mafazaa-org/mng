@@ -14,4 +14,4 @@ openssl pkcs12 -in ./c/elastic-certificates.p12 -passin "pass:$CERT_PASSWORD" -o
 
 openssl req -x509 -newkey rsa:4096 -nodes -keyout "./c/kibana.key" -out "./c/kibana.crt" -days 365 \
     -subj "/C=US/ST=State/L=City/O=Organization/OU=Unit/CN=localhost" \
-    -addext "subjectAltName=DNS:localhost,kibana,IP:127.0.0.1"
+    -addext "subjectAltName=DNS:localhost,DNS:kibana,IP:127.0.0.1"

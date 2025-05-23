@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": ".",
+			"name": "mng"
+		},
+		{
+			"path": "elasticsearch",
+			"name": "elasticsearch"
+		},
+		{
+			"path": "kibana",
+			"name": "kibana"
+		},
+		{
+			"path": "fluentd",
+			"name": "fluentd"
+		}
+	]
+}

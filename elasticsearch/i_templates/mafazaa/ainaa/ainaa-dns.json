@@ -3,10 +3,17 @@
 	"template": {
 		"mappings": {
 			"properties": {
-				"source_ip": {
-					"type": "ip"
+				"source": {
+					"properties": {
+						"ip": {
+							"type": "ip"
+						},
+						"port": {
+							"type": "number"
+						}
+					}
 				},
-				"dns_query": {
+				"query": {
 					"properties": {
 						"qname": {
 							"type": "keyword"
@@ -18,13 +25,10 @@
 				},
 				"response": {
 					"properties": {
-						"resolved": {
+						"block": {
 							"type": "boolean"
 						},
 						"block_regex": {
-							"type": "boolean"
-						},
-						"block": {
 							"type": "boolean"
 						},
 						"upstream": {

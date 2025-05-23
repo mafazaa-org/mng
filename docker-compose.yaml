@@ -31,6 +31,7 @@ services:
             CA_PASSWORD: ${CA_PASSWORD}
             CERT_PASSWORD: ${CERT_PASSWORD}
             ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+            KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD}
             ENV_NAME: ${ENV_NAME}
         command: >
             /bin/bash -c "
