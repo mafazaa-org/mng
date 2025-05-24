@@ -55,7 +55,7 @@ services:
         networks:
             - efk
         healthcheck:
-            test: ["CMD", "curl", "-f", "https://localhost:5601/"]
+            test: ["CMD", "curl", "-f", "https://localhost:5601/", "-k"]
             interval: 10s
             retries: 5
             timeout: 5s
@@ -81,6 +81,8 @@ services:
             - ./fluentd/conf:/fluentd/etc/
             - ./c/elastic-ca.pem:/fluentd/etc/elastic-ca.pem
         environment:
-            ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+            FLUENTD_ELASTICSEARCH_PASSWORD: ${FLUENTD_ELASTICSEARCH_PASSWORD}
+            FLUENTD_ELASTICSEARCH_USER: ${FLUENTD_ELASTICSEARCH_USER}
+            FLUENTD_FLUSH_INTERVAL: ${FLUENTD_FLUSH_INTERVAL}
 networks:
     efk:
