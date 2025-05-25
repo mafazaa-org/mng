@@ -1,3 +1,5 @@
+name: mng
+
 services:
     elasticsearch:
         image: docker.elastic.co/elasticsearch/elasticsearch:9.0.1
@@ -8,6 +10,7 @@ services:
             - ./elasticsearch/setup.sh:/usr/share/elasticsearch/setup-elasticsearch.sh
             - ./c:/usr/share/elasticsearch/config/certs
             - ./elasticsearch/i_templates:/usr/share/elasticsearch/i_templates/
+            - /var/log/elasticsearch:/usr/share/elasticsearch/logs
         ports:
             - "9200:9200"
         healthcheck:
@@ -40,6 +43,7 @@ services:
                 /bin/bash /usr/share/elasticsearch/setup-elasticsearch.sh '${ELASTIC_PASSWORD}' '${KIBANA_SYSTEM_PASSWORD}' && 
                 wait
             "
+
     kibana:
         image: docker.elastic.co/kibana/kibana:9.0.1
         container_name: kibana
@@ -64,6 +68,7 @@ services:
             ENV_NAME: ${ENV_NAME}
             KIBANA_SYSTEM_PASSWORD: ${KIBANA_SYSTEM_PASSWORD}
             CERT_PASSWORD: ${CERT_PASSWORD}
+
     py:
         container_name: py
         hostname: py
