@@ -1,0 +1,15 @@
+{
+	"name": "ainaa-dns-server",
+	"body": {
+		"index_patterns": ["mafazaa.ainaa.dns.*.server"],
+		"template": {
+			"mappings": {
+				"properties": {
+					"msg": {
+						"type": "keyword"
+					}
+				}
+			}
+		}
+	}
+}

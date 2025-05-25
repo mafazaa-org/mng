@@ -1,0 +1,11 @@
+{
+	"name": "ainaa-dns-req_start",
+	"body": {
+		"index_patterns": ["mafazaa.ainaa.dns.*.req_start"],
+		"template": {
+			"mappings": {
+				"properties": {}
+			}
+		}
+	}
+}

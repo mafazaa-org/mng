@@ -1,0 +1,38 @@
+{
+	"name": "ainaa-dns-reply",
+	"body": {
+		"index_patterns": ["mafazaa.ainaa.dns.*.reply"],
+		"template": {
+			"mappings": {
+				"properties": {
+					"block": {
+						"type": "boolean"
+					},
+					"block_regex": {
+						"type": "boolean"
+					},
+					"upstream": {
+						"type": "keyword"
+					},
+					"google_regex": {
+						"type": "boolean"
+					},
+					"cache_hit": {
+						"type": "boolean"
+					},
+					"answers": {
+						"type": "nested",
+						"properties": {
+							"answer": {
+								"type": "keyword"
+							},
+							"type": {
+								"type": "keyword"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

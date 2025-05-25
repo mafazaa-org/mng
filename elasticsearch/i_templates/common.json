@@ -1,0 +1,16 @@
+{
+	"body": {
+		"template": {
+			"mappings": {
+				"properties": {
+					"level": {
+						"type": "keyword"
+					}
+				}
+			},
+			"settings": {
+				"index.lifecycle.name": "global-ilm"
+			}
+		}
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"name": "ainaa-dns-error",
+	"body": {
+		"priority": 0,
+		"index_patterns": ["mafazaa.ainaa.dns.**error"],
+		"template": {
+			"mappings": {
+				"properties": {
+					"msg": {
+						"type": "keyword"
+					},
+					"exception": {
+						"type": "keyword"
+					}
+				}
+			}
+		}
+	}
+}

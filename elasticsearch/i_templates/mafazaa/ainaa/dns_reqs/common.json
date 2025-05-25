@@ -1,0 +1,26 @@
+{
+	"body": {
+		"template": {
+			"mappings": {
+				"properties": {
+					"source": {
+						"properties": {
+							"ip": {
+								"type": "ip"
+							},
+							"port": {
+								"type": "keyword"
+							}
+						}
+					},
+					"qname": {
+						"type": "keyword"
+					},
+					"type": {
+						"type": "keyword"
+					}
+				}
+			}
+		}
+	}
+}

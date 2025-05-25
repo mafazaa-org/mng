@@ -1,0 +1,19 @@
+{
+	"name": "global-ilm",
+	"body": {
+		"policy": {
+			"phases": {
+				"hot": {
+					"min_age": "0d",
+					"actions": {}
+				},
+				"delete": {
+					"min_age": "15d",
+					"actions": {
+						"delete": {}
+					}
+				}
+			}
+		}
+	}
+}
